@@ -24,7 +24,7 @@ jobs:
       - run:
           command: | 
             curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-      - run: helm upgrade --install golang-hello-app golang-hello/ --namespace=dev -f golang-hello/values.yaml --set-string image.tag="latest" --set ingress.hosts[0].host=golang-hello-app.yavuzyildirim.dev --set ingress.hosts[0].paths[0]="/"
+      - run: helm upgrade --install golang-hello-app golang-hello/ --namespace=dev -f golang-hello/values.yaml --set-string image.tag="latest" --set ingress.hosts[0].host=yavuzyildirim.westus.cloudapp.azure.com --set ingress.hosts[0].paths[0]="/" --set ingress.tls[0].secretName=stage-tls --set ingress.tls[0].hosts[0]="yavuzyildirim.westus.cloudapp.azure.com"
     
 
 workflows:
