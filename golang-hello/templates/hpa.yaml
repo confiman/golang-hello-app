@@ -25,4 +25,17 @@ spec:
         name: memory
         targetAverageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
   {{- end }}
+  {{- if .Values.autoscaling.averageRequest }}
+    - type: Object
+      object:
+        metric:
+          name: requests-per-second
+        describedObject:
+          apiVersion: networking.k8s.io/v1beta1
+          kind: Ingress
+          name: main-route
+        target:
+          type: Value
+          value: {{ .Values.autoscaling.averageRequest }}
+  {{- end }}
 {{- end }}
