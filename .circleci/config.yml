@@ -12,8 +12,20 @@ jobs:
       - run: docker build -t confiman/golang-hello-app:latest .
       - run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
       - run: docker push confiman/golang-hello-app:latest
+  
+  deploy-to-stage:
+    machine: true
+    steps:
+      - checkout
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: hepsiburada
+          perform-login: true
+          resource-group: default
+      - run: helm upgrade --install golang-hello-app golang-hello/ --namespace=dev -f golang-hello/values.yaml --set-string image.tag="latest" --set ingress.hosts[0].host=golang-hello-app.yavuzyildirim.dev --set ingress.hosts[0].paths[0]="/"
+    
 
 workflows:
   deployment:
     jobs:
       - build-push-docker-image
+      - deploy-to-stage
