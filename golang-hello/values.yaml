@@ -70,7 +70,7 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 10
   #targetCPUUtilizationPercentage: 80
-  averageRequest: 1k
+  averageRequest: 10
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
