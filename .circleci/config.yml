@@ -28,4 +28,6 @@ workflows:
   deployment:
     jobs:
       - build-push-docker-image
-      - deploy-to-stage
+      - deploy-to-stage:
+          requires:
+            - build-push-docker-image
