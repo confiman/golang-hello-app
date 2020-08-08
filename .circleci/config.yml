@@ -16,4 +16,4 @@ jobs:
 workflows:
   deployment:
     jobs:
-	  - build-push-docker-image
+      - build-push-docker-image
