@@ -35,10 +35,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: INSTRUMENTATION_KEY
-            valueFrom:
-              secretKeyRef:
-                name: appinsightskey
-                key: instrumentation-key
+              valueFrom:
+                secretKeyRef:
+                  name: appinsightskey
+                  key: instrumentation-key
           ports:
             - name: http
               containerPort: 11130
