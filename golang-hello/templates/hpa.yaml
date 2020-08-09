@@ -26,13 +26,9 @@ spec:
         targetAverageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
   {{- end }}
   {{- if .Values.autoscaling.averageRequest }}
-    - type: Object
-      object:
-        target:
-          apiVersion: extensions/v1beta1
-          kind: Ingress
-          name: hello-world
-        targetValue: {{ .Values.autoscaling.averageRequest }}
-        metricName: requests-per-second
+    - type: Pods
+      pods:
+        metricName: rps
+        targetAverageValue: {{ .Values.autoscaling.averageRequest }}
   {{- end }}
 {{- end }}
